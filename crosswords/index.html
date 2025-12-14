@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrossWords</title>
+  <link rel="stylesheet" href="./CSS/style.css">
+</head>
+<body>
+
+    <header class="game-header">
+        <h1>PalZz Word Puzzle</h1>
+        <div class="stats">
+            <span>Score: <strong id="score">0</strong></span>
+            <span>Time: <strong id="timer">60</strong>s</span>
+        </div>
+    </header>
+
+    <main class="game-container">
+
+        <!-- LEFT -->
+        <section class="grid-section">
+            <div class="letter-grid"></div>
+        </section>
+
+        <!-- RIGHT -->
+        <section class="images-section">
+            <h2>Found Animals</h2>
+            <div class="images-container">
+                <!-- EXAMPLE CREATION OF IMAGE DIV  -->
+
+                <!-- <div class="image">
+                    <img src="./assets/images/cat.jpeg" alt="">
+                    <div class="right-icon">
+                        <img src="./assets/icons/right-icon.png" alt="right-icon">
+                    </div>
+                </div> -->
+            </div>
+        </section>
+
+    </main>
+
+    <section class="lose">
+        <div class="lose-card">
+            <h2>Game Over! 🚫</h2>
+            <p>Your final score is: <span id="final-score">0</span></p>
+            <button id="restart-btn">Restart Game</button>
+        </div>
+    </section>
+
+    <section class="win">
+        <div class="win-card">
+            <h2>You Win 🏅🎉</h2>
+            <p>Finshed in: <span id="finshed-time">0</span></p>
+            <p>Your final score is: <span id="all-score">0</span></p>
+            <div class="btns">
+                <button id="again-btn">Play Again</button>
+                <button id="next-btn">Next Level</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="./JS/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+ }
+
+body {
+  margin: 0;
+  background: #020617;
+  color: #fff;
+}
+
+.home-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 35px;
+
+    .head{
+        h1{
+            font-size: 4rem;
+            background: linear-gradient(90deg,rgba(14, 41, 94, 1) 41%, rgba(128, 142, 171, 1) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    .sub-title{
+        p{
+            font-size: 1.5rem;
+            color: #5c80b8;
+        }
+    }
+
+    .challenges{
+        padding: 10px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        /* flex-wrap: wrap; */
+        a{
+            width: 25%;
+            display: flex;
+            text-decoration: none;
+            .challenge-box{
+                padding: 45px 40px;
+                background: #1e293b;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                transition: 0.3s;
+                border: 1px solid transparent;
+                &:hover{
+                    background: #374151;
+                    transform: translateY(-10px);
+                    border: 1px solid #3b82f6;
+                    box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+                }
+                h2{
+                    font-size: 1.5rem;
+                    color: #e0e0e0;
+                    margin: 5px 0px;
+                }
+                p{
+                    font-size: 1rem;
+                    line-height: 25px;
+                    color: #6b6f76;
+                    padding: 1rem 0;
+                }
+            }
+        }
+    }
+}
+
+/* RESPONSIVE DISEGN  */
+
+@media (min-width : 280px) and (max-width : 767px){
+    .head{
+        h1{
+            font-size: 3.2rem !important;
+        }
+    }
+    .sub-title{
+        p{
+            font-size: 1.2rem !important;
+        }
+    }
+    .challenges{
+        flex-direction: column;
+        gap: 20px;
+        a{
+            width: 75% !important;
+            .challenge-box{
+                padding: 20px !important;
+                h2{
+                    font-size: 1.2rem !important;
+                }
+                p{
+                    font-size: 0.9rem !important;
+                    line-height: 20px !important;
+                }
+            }
+        }
+    }
+}
