@@ -29,7 +29,25 @@ async function loadWordsFromAPI() {
     startGame();
   } catch (error) {
     console.error("Failed to load words", error);
-    alert("Error loading game data");
+    // alert("Error loading game data");
+
+    // Fallback words 
+    WORDS = [
+      { 
+        word: "CAT", 
+        image: "../assets/images/cat.jpeg" 
+      },
+      { 
+        word: "DOG", 
+        image: "../assets/images/dog.jpeg" 
+      },
+      { 
+        word: "LION", 
+        image: "../assets/images/lion.jpeg" 
+      },
+    ];
+    startGame();
+
   }
 }
 
