@@ -15,7 +15,7 @@ let WORDS = [];
  * FETCH DATA FROM API
  **********************/ 
 async function loadWordsFromAPI() {
-  const baseUrl = "http://pictopuzzle.runasp.net"
+  const baseUrl = "https://pictopuzzle.runasp.net"
   try {
     const response = await fetch(`${baseUrl}/api/Words`);
     const data = await response.json();
