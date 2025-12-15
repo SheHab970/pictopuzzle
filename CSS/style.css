@@ -20,6 +20,7 @@ body {
     gap: 35px;
 
     .head{
+        animation: fadeInDown 0.8s ease-in-out;
         h1{
             font-size: 4rem;
             background: linear-gradient(90deg,rgba(14, 41, 94, 1) 41%, rgba(128, 142, 171, 1) 100%);
@@ -30,6 +31,7 @@ body {
     }
 
     .sub-title{
+        animation: fadeInUp 1s ease-in-out;
         p{
             font-size: 1.5rem;
             color: #5c80b8;
@@ -41,6 +43,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: space-evenly;
+        animation: fadeInUp 1s ease-in-out;
         /* flex-wrap: wrap; */
         a{
             width: 25%;
@@ -72,6 +75,29 @@ body {
                 }
             }
         }
+    }
+}
+
+/* ANIMATIONS  */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
