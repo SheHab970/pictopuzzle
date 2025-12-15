@@ -2,20 +2,37 @@
  * GAME CONFIG
  **********************/
 const GRID_SIZE = 6;
-const WORDS = [
-  { 
-    word: "CAT", 
-    image: "../assets/images/cat.jpeg" 
- },
-  { 
-    word: "DOG", 
-    image: "../assets/images/dog.jpeg" 
-  },
-  { 
-    word: "LION", 
-    image: "../assets/images/lion.jpeg" 
-  },
-];
+let WORDS = [];
+// EXAMPLE DATA 
+  // {
+  //   "id": 1,
+  //   "word": "apple",
+  //   "imageUrl": "https://i.imgur.com/CGuDGFN.png",
+  //   "difficultyLevel": 1
+  // },
+
+/**********************
+ * FETCH DATA FROM API
+ **********************/ 
+async function loadWordsFromAPI() {
+  const baseUrl = "http://pictopuzzle.runasp.net"
+  try {
+    const response = await fetch(`${baseUrl}/api/Words`);
+    const data = await response.json();
+
+    WORDS = data.map(item => ({
+      id: item.id,
+      word: item.word.toUpperCase(),
+      image: item.imageUrl
+    }));
+
+    startGame();
+  } catch (error) {
+    console.error("Failed to load words", error);
+    alert("Error loading game data");
+  }
+}
+
 
 const DIRECTIONS = [
   { r: 0, c: 1 },   // right
@@ -42,12 +59,19 @@ let timeLeft = 60;
 /**********************
  * INIT
  **********************/
-createEmptyGrid();
-placeAllWords();
-fillEmptyCells();
-renderGrid();
-startTimer();
-showCurrentImage();
+loadWordsFromAPI();
+
+/**********************
+ * START GAME AFTER LOADING WORDS
+ **********************/
+function startGame() {
+  createEmptyGrid();
+  placeAllWords();
+  fillEmptyCells();
+  renderGrid();
+  startTimer();
+  showCurrentImage();
+}
 
 /**********************
  * GRID GENERATION
