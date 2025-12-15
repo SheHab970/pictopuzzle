@@ -39,6 +39,8 @@ body {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 15px;
+      touch-action: none;
+      
     }
   }
 }
@@ -56,7 +58,6 @@ body {
   transition: 0.2s;
   user-select: none;
   animation: rightCell 0.3s ease-out;
-  touch-action: none;
   user-select: none;
 }
 
