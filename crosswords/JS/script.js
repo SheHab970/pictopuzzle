@@ -145,6 +145,11 @@ function renderGrid() {
       cell.addEventListener("mousedown", e => onMouseDown(e, cell));
       cell.addEventListener("mouseenter", () => onMouseEnter(cell));
 
+      // Touch Events
+      cell.addEventListener("touchstart", e => onTouchStart(e, cell));
+      cell.addEventListener("touchmove", onTouchMove);
+      cell.addEventListener("touchend", onTouchEnd);
+
       gridEl.appendChild(cell);
     });
   });
@@ -335,6 +340,47 @@ function checkWordOnRelease() {
   }
 }
 
+/**********************
+ * TOUCH SUPPORT
+ **********************/
+let isTouching = false;
+
+function onTouchStart(e, cell) {
+  e.preventDefault(); // يمنع Scroll
+  resetSelection();
+  isTouching = true;
+  onCellClick(cell);
+}
+
+function onTouchMove(e) {
+  if (!isTouching) return;
+
+  const touch = e.touches[0];
+  const element = document.elementFromPoint(
+    touch.clientX,
+    touch.clientY
+  );
+
+  if (element && element.classList.contains("cell")) {
+    onCellClick(element);
+  }
+}
+
+function onTouchEnd() {
+  if (!isTouching) return;
+
+  isTouching = false;
+  checkWordOnRelease();
+}
+
+
+/**********************
+ * RESET SELECTION
+ **********************/
+function resetSelection() {
+  selectedCells.forEach(c => c.classList.remove("selected"));
+  selectedCells = [];
+}
 
 
 
