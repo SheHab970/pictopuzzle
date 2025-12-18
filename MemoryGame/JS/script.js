@@ -24,8 +24,8 @@ const CardArray = [
         img: '../assets/images/F0305649.PNG'
     },
     {
-        name: 'aki',
-        img: '../assets/images/F0305652.PNG'
+        name: 'CAT',
+        img: '../assets/images/cat.jpeg'
     },
     {
         name: 'lemonz',
@@ -72,8 +72,8 @@ const CardArray = [
         img: '../assets/images/F0305649.PNG'
     },
     {
-        name: 'aki',
-        img: '../assets/images/F0305652.PNG'
+        name: 'CAT',
+        img: '../assets/images/cat.jpeg'
     },
     {
         name: 'lemonz',
@@ -127,23 +127,40 @@ function flipCard() {
         this.setAttribute('src', CardArray[cardId].img)
         if (cardsChosen.length === 2) {
             console.log('i entered if')
-            setTimeout(checkMatch, 500)
+            GridDisplay.classList.toggle('event-pointer')
+            setTimeout(() => {
+                checkMatch()
+                GridDisplay.classList.toggle('event-pointer')
+            }, 500)
         }
     }
 }
 function checkMatch() {
     if (cardsChosen[0].name === cardsChosen[1].name) {
-        score += 50
+        score += 10
         ScoreDisplay.innerHTML = score
         originalCardsChosen.pop()
         originalCardsChosen.pop()
         cardsChosen.pop()
         cardsChosen.pop()
 
-        if (score % 600 === 0) {
-            GridDisplay.innerHTML = ''
-            CardArray.sort(() => 0.5 - Math.random())
-            createBoard()
+        if (score % 120 === 0) {
+
+            const winCard = document.querySelector(".win")
+            const finalScore = document.getElementById('all-score')
+            const restartBtn = document.getElementById('again-btn')
+            
+            finalScore.textContent = score
+            winCard.style.display = "block"
+
+            restartBtn.addEventListener('click', () => {
+                winCard.style.display = "none"
+                GridDisplay.innerHTML = ''
+                score = 0
+                ScoreDisplay.innerHTML = score
+                CardArray.sort(() => 0.5 - Math.random())
+                createBoard();
+            })
         }
     }
     else {

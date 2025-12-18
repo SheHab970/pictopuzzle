@@ -4,12 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Game</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./CSS/style.css">
 </head>
 <body>
-    <h3>Score: <span id="result"></span></h3>
-    <div id="grid" ></div>
 
-    <script src="./script.js"></script>
+    <header class="game-header">
+        <h1>Memory Match</h1>
+        <div class="stats">
+            <span>Score: <strong id="result">0</strong></span>
+            <!-- <span>Time: <strong id="timer">60</strong>s</span> -->
+        </div>
+    </header>
+
+
+    <main class="game-container">
+
+        <!-- IMAGE CONTAINER -->
+         <section class="grid-section">
+                <div id="grid" class="grid"></div>
+         </section>
+
+    </main>
+
+    <!-- WIN MODEL -->
+    <section class="win">
+        <div class="win-card">
+            <h2>You Win 🏅🎉</h2>
+            <!-- <p>Finshed in: <span id="finshed-time">0</span></p> -->
+            <p>Your final score is: <span id="all-score">0</span></p>
+            <div class="btns">
+                <button id="again-btn">Play Again</button>
+                <!-- <button id="next-btn">Next Level</button> -->
+            </div>
+        </div>
+    </section>
+
+
+    <script src="./JS/script.js"></script>
 </body>
 </html>
