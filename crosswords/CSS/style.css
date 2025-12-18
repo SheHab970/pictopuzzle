@@ -141,7 +141,7 @@ body {
 
 /* LOSE CARD  */
 .lose,.win{
-    position: absolute;
+    position: fixed;
     display: none;
     top: 0;
     width: 100%;
