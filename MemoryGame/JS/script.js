@@ -101,6 +101,15 @@ let CardArray = [
     // }
 ]
 
+function showLoading() {
+    document.getElementById('loading-spinner').style.display = 'block';
+}
+
+// Function to hide the loading indicator
+function hideLoading() {
+    document.getElementById('loading-spinner').style.display = 'none';
+}
+
 /**********************
  * INIT
  **********************/
@@ -119,25 +128,32 @@ loadWordsFromAPI();
   // },
   
 async function loadWordsFromAPI() {
+
+    showLoading(); // Set loading to true before the API call
+
   const baseUrl = "https://pictopuzzle.runasp.net"
   try {
     const response = await fetch(`${baseUrl}/api/Words`);
-    const data = await response.json();
-    
-    CardArray = data.map(item => ({
-      id: item.id,
-      word: item.word.toUpperCase(),
-      image: item.imageUrl
-    }));
-
-/**********************
-* DUPLICATE DATA
-**********************/ 
-    CardArray.push(...CardArray);
-    console.log(CardArray)
-
-// call creation function 
-    createBoard();
+    if(response.ok){
+        const data = await response.json();
+            
+            CardArray = data.map(item => ({
+            id: item.id,
+            word: item.word.toUpperCase(),
+            image: item.imageUrl
+            }));
+        
+        /**********************
+        * DUPLICATE DATA
+        **********************/ 
+            CardArray.push(...CardArray);
+            console.log(CardArray)
+        
+        // call creation function 
+            createBoard();
+    }else{
+        throw new Error('Network response was not ok');  
+    }
 
   } catch (error) {
     console.error("Failed to load words", error);
@@ -171,6 +187,8 @@ async function loadWordsFromAPI() {
       },
     ];
     createBoard();
+  }finally {
+    hideLoading(); // Set loading to false after the API call is complete
   }
 }
 
@@ -182,10 +200,16 @@ function createBoard() {
 // CREATE IMAGE CARDS 
     for (let i = 0; i < CardArray.length; i++) {
         const card = document.createElement('img')
-        card.setAttribute('src', '../assets/images/F0394208.PNG')
+        card.setAttribute('src', CardArray[i].image)
         card.setAttribute('data-id', i)
         card.addEventListener('click', flipCard)
         GridDisplay.appendChild(card)
+
+        setTimeout( () => {
+            card.src = '../assets/images/F0394208.PNG'
+            
+        }
+        ,1500)
     }
 }
 const originalCardsChosen = []
