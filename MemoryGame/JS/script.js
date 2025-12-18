@@ -2,109 +2,184 @@ const ScoreDisplay = document.getElementById('result')
 let score = 0
 ScoreDisplay.innerHTML = score
 const GridDisplay = document.getElementById('grid')
-const CardArray = [
-    {
-        name: 'أوزي بوزي',
-        img: '../assets/images/F0237351.PNG'
-    },
-    {
-        name: 'pilliger',
-        img: '../assets/images/F0259336.PNG'
-    },
-    {
-        name: 'molister',
-        img: '../assets/images/F0286933.PNG'
-    },
-    {
-        name: 'الحته وهو بيضحك',
-        img: '../assets/images/Screenshot 2025-11-14 161421.png'
-    },
-    {
-        name: 'القائد',
-        img: '../assets/images/F0305649.PNG'
-    },
-    {
-        name: 'CAT',
-        img: '../assets/images/cat.jpeg'
-    },
-    {
-        name: 'lemonz',
-        img: '../assets/images/F0306753.PNG'
-    },
-    {
-        name: 'البنظ والكنظ',
-        img: '../assets/images/F0312228.PNG'
-    },
-    {
-        name: 'الحته',
-        img: '../assets/images/F0314773.PNG'
-    },
-    {
-        name: 'الحته وهو مكسوف',
-        img: '../assets/images/F0316513.PNG'
-    },
-    {
-        name: 'icecream',
-        img: '../assets/images/F0306748.PNG'
-    },
-    {
-        name: 'lemonscream',
-        img: '../assets/images/F0316519.PNG'
-    },
-    {
-        name: 'أوزي بوزي',
-        img: '../assets/images/F0237351.PNG'
-    },
-    {
-        name: 'pilliger',
-        img: '../assets/images/F0259336.PNG'
-    },
-    {
-        name: 'molister',
-        img: '../assets/images/F0286933.PNG'
-    },
-    {
-        name: 'الحته وهو بيضحك',
-        img: '../assets/images/Screenshot 2025-11-14 161421.png'
-    },
-    {
-        name: 'القائد',
-        img: '../assets/images/F0305649.PNG'
-    },
-    {
-        name: 'CAT',
-        img: '../assets/images/cat.jpeg'
-    },
-    {
-        name: 'lemonz',
-        img: '../assets/images/F0306753.PNG'
-    },
-    {
-        name: 'البنظ والكنظ',
-        img: '../assets/images/F0312228.PNG'
-    },
-    {
-        name: 'الحته',
-        img: '../assets/images/F0314773.PNG'
-    },
-    {
-        name: 'الحته وهو مكسوف',
-        img: '../assets/images/F0316513.PNG'
-    },
-    {
-        name: 'icecream',
-        img: '../assets/images/F0306748.PNG'
-    },
-    {
-        name: 'lemonscream',
-        img: '../assets/images/F0316519.PNG'
-    }
+let CardArray = [
+    // {
+    //     name: 'أوزي بوزي',
+    //     img: '../assets/images/F0237351.PNG'
+    // },
+    // {
+    //     name: 'pilliger',
+    //     img: '../assets/images/F0259336.PNG'
+    // },
+    // {
+    //     name: 'molister',
+    //     img: '../assets/images/F0286933.PNG'
+    // },
+    // {
+    //     name: 'الحته وهو بيضحك',
+    //     img: '../assets/images/Screenshot 2025-11-14 161421.png'
+    // },
+    // {
+    //     name: 'القائد',
+    //     img: '../assets/images/F0305649.PNG'
+    // },
+    // {
+    //     name: 'CAT',
+    //     img: '../assets/images/cat.jpeg'
+    // },
+    // {
+    //     name: 'lemonz',
+    //     img: '../assets/images/F0306753.PNG'
+    // },
+    // {
+    //     name: 'البنظ والكنظ',
+    //     img: '../assets/images/F0312228.PNG'
+    // },
+    // {
+    //     name: 'الحته',
+    //     img: '../assets/images/F0314773.PNG'
+    // },
+    // {
+    //     name: 'الحته وهو مكسوف',
+    //     img: '../assets/images/F0316513.PNG'
+    // },
+    // {
+    //     name: 'icecream',
+    //     img: '../assets/images/F0306748.PNG'
+    // },
+    // {
+    //     name: 'lemonscream',
+    //     img: '../assets/images/F0316519.PNG'
+    // },
+    // {
+    //     name: 'أوزي بوزي',
+    //     img: '../assets/images/F0237351.PNG'
+    // },
+    // {
+    //     name: 'pilliger',
+    //     img: '../assets/images/F0259336.PNG'
+    // },
+    // {
+    //     name: 'molister',
+    //     img: '../assets/images/F0286933.PNG'
+    // },
+    // {
+    //     name: 'الحته وهو بيضحك',
+    //     img: '../assets/images/Screenshot 2025-11-14 161421.png'
+    // },
+    // {
+    //     name: 'القائد',
+    //     img: '../assets/images/F0305649.PNG'
+    // },
+    // {
+    //     name: 'CAT',
+    //     img: '../assets/images/cat.jpeg'
+    // },
+    // {
+    //     name: 'lemonz',
+    //     img: '../assets/images/F0306753.PNG'
+    // },
+    // {
+    //     name: 'البنظ والكنظ',
+    //     img: '../assets/images/F0312228.PNG'
+    // },
+    // {
+    //     name: 'الحته',
+    //     img: '../assets/images/F0314773.PNG'
+    // },
+    // {
+    //     name: 'الحته وهو مكسوف',
+    //     img: '../assets/images/F0316513.PNG'
+    // },
+    // {
+    //     name: 'icecream',
+    //     img: '../assets/images/F0306748.PNG'
+    // },
+    // {
+    //     name: 'lemonscream',
+    //     img: '../assets/images/F0316519.PNG'
+    // }
 ]
+
+/**********************
+ * INIT
+ **********************/
+loadWordsFromAPI();
+
+
+/**********************
+ * FETCH DATA FROM API
+ **********************/ 
+// EXAMPLE DATA 
+  // {
+  //   "id": 1,
+  //   "word": "apple",
+  //   "imageUrl": "https://i.imgur.com/CGuDGFN.png",
+  //   "difficultyLevel": 1
+  // },
+  
+async function loadWordsFromAPI() {
+  const baseUrl = "https://pictopuzzle.runasp.net"
+  try {
+    const response = await fetch(`${baseUrl}/api/Words`);
+    const data = await response.json();
+    
+    CardArray = data.map(item => ({
+      id: item.id,
+      word: item.word.toUpperCase(),
+      image: item.imageUrl
+    }));
+
+/**********************
+* DUPLICATE DATA
+**********************/ 
+    CardArray.push(...CardArray);
+    console.log(CardArray)
+
+// call creation function 
+    createBoard();
+
+  } catch (error) {
+    console.error("Failed to load words", error);
+    // alert("Error loading game data");
+
+    // Fallback words 
+    CardArray = [
+      { 
+        word: "CAT", 
+        image: "../assets/images/cat.jpeg" 
+      },
+      { 
+        word: "DOG", 
+        image: "../assets/images/dog.jpeg" 
+      },
+      { 
+        word: "LION", 
+        image: "../assets/images/lion.jpeg" 
+      },
+      { 
+        word: "CAT", 
+        image: "../assets/images/cat.jpeg" 
+      },
+      { 
+        word: "DOG", 
+        image: "../assets/images/dog.jpeg" 
+      },
+      { 
+        word: "LION", 
+        image: "../assets/images/lion.jpeg" 
+      },
+    ];
+    createBoard();
+  }
+}
+
 //idk what ()=>0.5 - Math.random() does
-CardArray.sort(() => 0.5 - Math.random())
-console.log(CardArray)
-createBoard()
 function createBoard() {
+// RESORT ARRAY 
+    CardArray.sort(() => 0.5 - Math.random())
+
+// CREATE IMAGE CARDS 
     for (let i = 0; i < CardArray.length; i++) {
         const card = document.createElement('img')
         card.setAttribute('src', '../assets/images/F0394208.PNG')
@@ -124,7 +199,7 @@ function flipCard() {
         cardsChosenId.push(cardId)
         cardsChosen.push(CardArray[cardId])
         originalCardsChosen.push(this)
-        this.setAttribute('src', CardArray[cardId].img)
+        this.setAttribute('src', CardArray[cardId].image)
         if (cardsChosen.length === 2) {
             console.log('i entered if')
             GridDisplay.classList.toggle('event-pointer')
@@ -136,7 +211,7 @@ function flipCard() {
     }
 }
 function checkMatch() {
-    if (cardsChosen[0].name === cardsChosen[1].name) {
+    if (cardsChosen[0].id === cardsChosen[1].id) {
         score += 10
         ScoreDisplay.innerHTML = score
         originalCardsChosen.pop()
@@ -144,7 +219,7 @@ function checkMatch() {
         cardsChosen.pop()
         cardsChosen.pop()
 
-        if (score % 120 === 0) {
+        if (score % CardArray.length*10 === 0) {
 
             const winCard = document.querySelector(".win")
             const finalScore = document.getElementById('all-score')
