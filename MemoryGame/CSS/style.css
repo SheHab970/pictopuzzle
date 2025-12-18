@@ -128,6 +128,7 @@ body {
     }
 
     .game-container{
+        flex-direction: column;
         .grid-section{
             height: calc(100vh - 118px);
             width: 100%;
