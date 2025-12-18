@@ -5,99 +5,99 @@ const GridDisplay = document.getElementById('grid')
 const CardArray = [
     {
         name: 'أوزي بوزي',
-        img: 'images/F0237351.PNG'
+        img: '../assets/images/F0237351.PNG'
     },
     {
         name: 'pilliger',
-        img: 'images/F0259336.PNG'
+        img: '../assets/images/F0259336.PNG'
     },
     {
         name: 'molister',
-        img: 'images/F0286933.PNG'
+        img: '../assets/images/F0286933.PNG'
     },
     {
         name: 'الحته وهو بيضحك',
-        img: 'images/Screenshot 2025-11-14 161421.png'
+        img: '../assets/images/Screenshot 2025-11-14 161421.png'
     },
     {
         name: 'القائد',
-        img: 'images/F0305649.PNG'
+        img: '../assets/images/F0305649.PNG'
     },
     {
         name: 'aki',
-        img: 'images/F0305652.PNG'
+        img: '../assets/images/F0305652.PNG'
     },
     {
         name: 'lemonz',
-        img: 'images/F0306753.PNG'
+        img: '../assets/images/F0306753.PNG'
     },
     {
         name: 'البنظ والكنظ',
-        img: 'images/F0312228.PNG'
+        img: '../assets/images/F0312228.PNG'
     },
     {
         name: 'الحته',
-        img: 'images/F0314773.PNG'
+        img: '../assets/images/F0314773.PNG'
     },
     {
         name: 'الحته وهو مكسوف',
-        img: 'images/F0316513.PNG'
+        img: '../assets/images/F0316513.PNG'
     },
     {
         name: 'icecream',
-        img: 'images/F0306748.PNG'
+        img: '../assets/images/F0306748.PNG'
     },
     {
         name: 'lemonscream',
-        img: 'images/F0316519.PNG'
+        img: '../assets/images/F0316519.PNG'
     },
     {
         name: 'أوزي بوزي',
-        img: 'images/F0237351.PNG'
+        img: '../assets/images/F0237351.PNG'
     },
     {
         name: 'pilliger',
-        img: 'images/F0259336.PNG'
+        img: '../assets/images/F0259336.PNG'
     },
     {
         name: 'molister',
-        img: 'images/F0286933.PNG'
+        img: '../assets/images/F0286933.PNG'
     },
     {
         name: 'الحته وهو بيضحك',
-        img: 'images/Screenshot 2025-11-14 161421.png'
+        img: '../assets/images/Screenshot 2025-11-14 161421.png'
     },
     {
         name: 'القائد',
-        img: 'images/F0305649.PNG'
+        img: '../assets/images/F0305649.PNG'
     },
     {
         name: 'aki',
-        img: 'images/F0305652.PNG'
+        img: '../assets/images/F0305652.PNG'
     },
     {
         name: 'lemonz',
-        img: 'images/F0306753.PNG'
+        img: '../assets/images/F0306753.PNG'
     },
     {
         name: 'البنظ والكنظ',
-        img: 'images/F0312228.PNG'
+        img: '../assets/images/F0312228.PNG'
     },
     {
         name: 'الحته',
-        img: 'images/F0314773.PNG'
+        img: '../assets/images/F0314773.PNG'
     },
     {
         name: 'الحته وهو مكسوف',
-        img: 'images/F0316513.PNG'
+        img: '../assets/images/F0316513.PNG'
     },
     {
         name: 'icecream',
-        img: 'images/F0306748.PNG'
+        img: '../assets/images/F0306748.PNG'
     },
     {
         name: 'lemonscream',
-        img: 'images/F0316519.PNG'
+        img: '../assets/images/F0316519.PNG'
     }
 ]
 //idk what ()=>0.5 - Math.random() does
@@ -107,7 +107,7 @@ createBoard()
 function createBoard() {
     for (let i = 0; i < CardArray.length; i++) {
         const card = document.createElement('img')
-        card.setAttribute('src', 'images/F0394208.PNG')
+        card.setAttribute('src', '../assets/images/F0394208.PNG')
         card.setAttribute('data-id', i)
         card.addEventListener('click', flipCard)
         GridDisplay.appendChild(card)
@@ -118,7 +118,7 @@ const cardsChosen = []
 const cardsChosenId = []
 
 function flipCard() {
-    if ((this.getAttribute('src') === 'images/F0394208.PNG')) {
+    if ((this.getAttribute('src') === '../assets/images/F0394208.PNG')) {
         console.log('i entered flip')
         let cardId = this.getAttribute('data-id')
         cardsChosenId.push(cardId)
@@ -147,8 +147,8 @@ function checkMatch() {
         }
     }
     else {
-        originalCardsChosen[0].setAttribute('src', 'images/F0394208.PNG')
-        originalCardsChosen[1].setAttribute('src', 'images/F0394208.PNG')
+        originalCardsChosen[0].setAttribute('src', '../assets/images/F0394208.PNG')
+        originalCardsChosen[1].setAttribute('src', '../assets/images/F0394208.PNG')
         originalCardsChosen.pop()
         originalCardsChosen.pop()
         cardsChosen.pop()
