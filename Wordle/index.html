@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+</head>
+<body>
+
+    <div class="wordle-container">
+    
+    
+        <!-- IMAGE CLUE -->
+        <div class="puzzle-image-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="Clue" />
+        </div>
+    
+    
+        <!-- GRID -->
+        <div class="grid">
+            <div class="row past">
+                <div class="green">r</div>
+                <div class="grey">e</div>
+                <div class="yellow">a</div>
+                <div class="grey">c</div>
+                <div class="grey">t</div>
+            </div>
+    
+    
+            <div class="row current">
+                <div class="filled">r</div>
+                <div class="filled">e</div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+    
+    
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    
+    
+        <!-- KEYPAD -->
+        <div class="keypad">
+            <div class="keypad-row">
+                <div class="key">q</div>
+                <div class="key">w</div>
+                <div class="key">e</div>
+                <div class="key">r</div>
+                <div class="key">t</div>
+                <div class="key">y</div>
+                <div class="key">u</div>
+                <div class="key">i</div>
+                <div class="key">o</div>
+                <div class="key">p</div>
+            </div>
+            <div class="keypad-row">
+                <div class="key">a</div>
+                <div class="key">s</div>
+                <div class="key">d</div>
+                <div class="key">f</div>
+                <div class="key">g</div>
+                <div class="key">h</div>
+                <div class="key">j</div>
+                <div class="key">k</div>
+                <div class="key">l</div>
+            </div>
+            <div class="keypad-row">
+                <div class="key wide">enter</div>
+                <div class="key">z</div>
+                <div class="key">x</div>
+                <div class="key">c</div>
+                <div class="key">v</div>
+                <div class="key">b</div>
+                <div class="key">n</div>
+                <div class="key">m</div>
+                <div class="key wide">⌫</div>
+            </div>
+        </div>
+    
+    
+        <!-- MODAL -->
+        <div class="modal">
+            <p>You Won!</p>
+            <div class="modal-actions">
+                <button class="next-btn">Next</button>
+                <button class="home-btn">Home</button>
+            </div>
+        </div>
+    
+    
+    </div>
+    
+
+    <script src="./JS/script.js"></script>
+</body>
+</html>
