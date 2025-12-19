@@ -9,6 +9,7 @@ let isCorrect = false;
 let guesses = Array(6).fill(null); // formatted guesses
 let history = [];
 let usedKeys = {}; // { a: 'green', b: 'yellow' }
+let score = 0;
 
 // --------- DOM ---------
 const grid = document.querySelector('.grid');
@@ -16,6 +17,16 @@ const keypad = document.querySelector('.keypad');
 const imageContainer = document.querySelector('.puzzle-image-container img');
 const modal = document.querySelector('.modal');
 const nextBtn = document.querySelector('.next-btn');
+const scoreEl = document.getElementById('score')
+
+function showLoading() {
+    document.getElementById('loading-spinner').style.display = 'block';
+}
+
+// Function to hide the loading indicator
+function hideLoading() {
+    document.getElementById('loading-spinner').style.display = 'none';
+}
 
 // --------- INIT ---------
 async function initGame() {
@@ -60,6 +71,9 @@ async function startNewGame() {
 
 // --------- FETCH WORD ---------
 async function fetchWord() {
+
+    showLoading(); // Set loading to true before the API call
+
     const baseUrl = "https://pictopuzzle.runasp.net"
   try {
     const res = await fetch(`${baseUrl}/api/Words`);
@@ -74,9 +88,11 @@ async function fetchWord() {
     imageContainer.src = imageUrl;
   } catch (err) {
     // fallback
-    solution = 'react';
-    imageContainer.src = 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg';
+    solution = 'house';
+    imageContainer.src = '../assets/images/house.jpg';
     console.warn('Fallback word used');
+  }finally{
+     hideLoading(); // Set loading to false after the API call is complete
   }
 }
 
@@ -138,6 +154,8 @@ function addNewGuess() {
   updateUsedKeys(formatted);
 
   if (currentGuess === solution) {
+    score += 10;
+    scoreEl.innerHTML = score
     isCorrect = true;
     showModal(true);
   }
