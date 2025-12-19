@@ -7,6 +7,7 @@ body {
   margin: 0;
   background: #0f172a;
   color: #fff;
+  overscroll-behavior: none;
 }
 
 /* HEADER */
@@ -26,25 +27,25 @@ body {
   display: flex;
   align-items: stretch;
 
-  /* GRID SECTION */
-  .grid-section {
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-
-    .letter-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 15px;
-      touch-action: none;
-      
-    }
-  }
 }
 
+/* GRID SECTION */
+.grid-section {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+
+}
+.letter-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+  touch-action: none !important;
+  
+}
 .cell {
   width: 80px;
   height: 80px;
@@ -59,6 +60,7 @@ body {
   user-select: none;
   animation: rightCell 0.3s ease-out;
   user-select: none;
+  touch-action: none;
 }
 
 
@@ -198,6 +200,23 @@ body {
   }
 }
 
+/* LOADER STYLE */
+.loading{
+  display: none;
+  position: absolute;
+  left: 48%;
+  .loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #FFF;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+    }
+}
+
 /* MODEL ANIMATION  */
 @keyframes fadeInModal {
     from {
@@ -236,6 +255,15 @@ body {
     transform: translateX(0);
   }
 }
+/* LOADER STYLE */
+@keyframes rotation {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+} 
 
 /* RESPONSIVE DISEGN  */
 

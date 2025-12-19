@@ -1,6 +1,7 @@
 /**********************
  * GAME CONFIG
  **********************/
+const gridElement = document.querySelector(".letter-grid");
 const GRID_SIZE = 6;
 let WORDS = [];
 // EXAMPLE DATA 
@@ -11,22 +12,38 @@ let WORDS = [];
   //   "difficultyLevel": 1
   // },
 
+function showLoading() {
+    document.getElementById('loading-spinner').style.display = 'block';
+}
+
+// Function to hide the loading indicator
+function hideLoading() {
+    document.getElementById('loading-spinner').style.display = 'none';
+}
+
 /**********************
  * FETCH DATA FROM API
  **********************/ 
 async function loadWordsFromAPI() {
+
+    showLoading(); // Set loading to true before the API call
+
   const baseUrl = "https://pictopuzzle.runasp.net"
   try {
     const response = await fetch(`${baseUrl}/api/Words`);
-    const data = await response.json();
-
-    WORDS = data.map(item => ({
-      id: item.id,
-      word: item.word.toUpperCase(),
-      image: item.imageUrl
-    }));
-
-    startGame();
+    if (response.ok) {
+      const data = await response.json();
+  
+      WORDS = data.map(item => ({
+        id: item.id,
+        word: item.word.toUpperCase(),
+        image: item.imageUrl
+      }));
+  
+      startGame();
+    }else{
+      throw new Error('Network response was not ok'); 
+    }
   } catch (error) {
     console.error("Failed to load words", error);
     // alert("Error loading game data");
@@ -48,6 +65,8 @@ async function loadWordsFromAPI() {
     ];
     startGame();
 
+  }finally{
+    hideLoading(); // Set loading to false after the API call is complete
   }
 }
 
@@ -147,10 +166,10 @@ function fillEmptyCells() {
 /**********************
  * RENDER GRID
  **********************/
+document.addEventListener("mouseup", onMouseUp);
 function renderGrid() {
   const gridEl = document.querySelector(".letter-grid");
   gridEl.innerHTML = "";
-  document.addEventListener("mouseup", onMouseUp);
 
   grid.forEach((row, r) => {
     row.forEach((letter, c) => {
@@ -351,25 +370,34 @@ function onMouseUp() {
   isMouseDown = false;
   checkWordOnRelease();
 }
-
-document.addEventListener(
+gridElement.addEventListener(
   "touchmove",
   e => {
     if (!isTouching) return;
 
-    e.preventDefault(); // 🔴 مهم جدًا
+    e.preventDefault();
 
     const touch = e.touches[0];
-    const element = document.elementFromPoint(
+    const el = document.elementFromPoint(
       touch.clientX,
       touch.clientY
     );
 
-    if (element && element.classList.contains("cell")) {
-      onCellClick(element);
+    if (el && el.classList.contains("cell")) {
+      onCellClick(el);
     }
   },
   { passive: false }
+);
+
+gridElement.addEventListener(
+  "touchend",
+  () => {
+    if (!isTouching) return;
+
+    isTouching = false;
+    checkWordOnRelease();
+  }
 );
 
 
@@ -393,23 +421,9 @@ let isTouching = false;
 
 function onTouchStart(e, cell) {
   e.preventDefault(); // يمنع Scroll
-  resetSelection();
   isTouching = true;
+  resetSelection();
   onCellClick(cell);
-}
-
-function onTouchMove(e) {
-  if (!isTouching) return;
-
-  const touch = e.touches[0];
-  const element = document.elementFromPoint(
-    touch.clientX,
-    touch.clientY
-  );
-
-  if (element && element.classList.contains("cell")) {
-    onCellClick(element);
-  }
 }
 
 function onTouchEnd() {
