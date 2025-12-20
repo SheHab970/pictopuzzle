@@ -20,6 +20,25 @@ body {
     margin-right: 20px;
   }
 }
+.logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+.image{
+    width: 35px;
+    height: 35px;
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s all ease-in-out;
+    &:hover{
+      transform: scale(1.2);
+    }
+  }
+}
 
 /* MAIN LAYOUT */
 .game-container {
