@@ -70,13 +70,13 @@ async function startNewGame() {
 }
 
 // --------- FETCH WORD ---------
-async function fetchWord() {
+async function fetchWord(level) {
 
     showLoading(); // Set loading to true before the API call
 
-    const baseUrl = "https://pictopuzzle.runasp.net"
+    const baseUrl = "https://picto.runasp.net"
   try {
-    const res = await fetch(`${baseUrl}/api/Words`);
+    const res = await fetch(`${baseUrl}/api/Words/difficulty/${level}`);
     if (!res.ok) throw new Error('Failed to fetch');
 
     const data = await res.json();
@@ -95,6 +95,20 @@ async function fetchWord() {
      hideLoading(); // Set loading to false after the API call is complete
   }
 }
+
+document.getElementById("startBtn").addEventListener("click", () => {
+  const level = document.getElementById("levelInput").value;
+  console.log(level,'LLL');
+  
+
+  if (!level) {
+    alert("Please enter a valid level");
+    return;
+  }
+
+  fetchWord(level);
+
+});
 
 // --------- GRID ---------
 function renderEmptyGrid() {

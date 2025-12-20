@@ -47,9 +47,31 @@ body {
     align-items: center;
     margin-bottom: 35px;
 
-    .stats span {
-        margin-right: 20px;
-    }
+}
+.stats{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.stats span {
+  margin-right: 20px;
+}
+.stats button{
+  color: #fff;
+  padding: 8px 5px;
+  border-radius: 8px;
+  background-color: rgb(0, 97, 161);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+  margin-left: 12px;
+  &:hover{
+    transform: translateY(-3px);
+  }
+}
+.stats select{
+  font-size: 14px;
 }
 .logo{
   display: flex;

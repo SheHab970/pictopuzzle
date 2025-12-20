@@ -4,13 +4,14 @@
 const gridElement = document.querySelector(".letter-grid");
 const GRID_SIZE = 6;
 let WORDS = [];
-// EXAMPLE DATA 
-  // {
-  //   "id": 1,
-  //   "word": "apple",
-  //   "imageUrl": "https://i.imgur.com/CGuDGFN.png",
-  //   "difficultyLevel": 1
-  // },
+const DIRECTIONS = [
+  { r: 0, c: 1 },   // right
+  // { r: 0, c: -1 },  // left
+  { r: 1, c: 0 },   // down
+  { r: -1, c: 0 }   // up
+];
+let timerInterval = null;
+let isMouseDown = false;
 
 function showLoading() {
     document.getElementById('loading-spinner').style.display = 'block';
@@ -24,13 +25,13 @@ function hideLoading() {
 /**********************
  * FETCH DATA FROM API
  **********************/ 
-async function loadWordsFromAPI() {
+async function loadWordsFromAPI(level) {
 
     showLoading(); // Set loading to true before the API call
 
-  const baseUrl = "https://pictopuzzle.runasp.net"
+  const baseUrl = "https://picto.runasp.net"
   try {
-    const response = await fetch(`${baseUrl}/api/Words`);
+    const response = await fetch(`${baseUrl}/api/Words/difficulty/${level}`);
     if (response.ok) {
       const data = await response.json();
   
@@ -41,6 +42,9 @@ async function loadWordsFromAPI() {
       }));
   
       startGame();
+      console.log(WORDS, 'www');
+      
+  
     }else{
       throw new Error('Network response was not ok'); 
     }
@@ -70,18 +74,19 @@ async function loadWordsFromAPI() {
   }
 }
 
+document.getElementById("startBtn").addEventListener("click", () => {
+  const level = document.getElementById("levelInput").value;
+  console.log(level,'LLL');
+  
 
-const DIRECTIONS = [
-  { r: 0, c: 1 },   // right
-  // { r: 0, c: -1 },  // left
-  { r: 1, c: 0 },   // down
-  { r: -1, c: 0 }   // up
-];
+  if (!level) {
+    alert("Please enter a valid level");
+    return;
+  }
 
-let timerInterval = null;
-let isMouseDown = false;
+  loadWordsFromAPI(level);
 
-
+});
 
 /**********************
  * GAME STATE
@@ -96,7 +101,7 @@ let timeLeft = 60;
 /**********************
  * INIT
  **********************/
-loadWordsFromAPI();
+// loadWordsFromAPI();
 
 /**********************
  * START GAME AFTER LOADING WORDS
@@ -182,18 +187,6 @@ function renderGrid() {
       cell.addEventListener("mousedown", e => onMouseDown(e, cell));
       cell.addEventListener("mouseenter", () => onMouseEnter(cell));
 
-      // Touch Events
-      cell.addEventListener(
-        "touchstart",
-        e => onTouchStart(e, cell),
-        { passive: false }
-      );
-
-      cell.addEventListener(
-        "touchend",
-        onTouchEnd
-      );
-
       gridEl.appendChild(cell);
     });
   });
@@ -230,17 +223,6 @@ function isAdjacent(a, b) {
 /**********************
  * WORD CHECK
  **********************/
-function checkWord() {
-  const word = selectedCells.map(c => c.textContent).join("");
-  const target = WORDS[currentWordIndex]?.word;
-
-  if (word === target) {
-    markCorrect();
-  }
-  if (!target.startsWith(word)) {
-    resetSelection();
-  }
-}
 
 function markCorrect() {
   selectedCells.forEach(c => {
@@ -299,18 +281,21 @@ function startTimer() {
   const finalScor = document.getElementById("final-score")
   const restartBtn = document.getElementById("restart-btn")
   timerInterval = setInterval(() => {
+
     timeLeft--;
     timerEl.textContent = timeLeft;
     if (timeLeft <= 0){
         finalScor.textContent = score;
         clearInterval(timerInterval);
         loseCard.style.display = "block"
-
+  
     }
-    restartBtn.addEventListener("click", () => {
-        location.reload()
-    })
+
   }, 1000);
+  
+  restartBtn.addEventListener("click", () => {
+      location.reload()
+  })
 }
 // CHECK WIN 
 function checkWin() {
@@ -330,6 +315,20 @@ function checkWin() {
     
     restartBtn.addEventListener('click', () => {
         location.reload()
+    })
+    nextBtn.addEventListener('click', () => {
+      const level = document.getElementById("levelInput");
+      levelValue = level.value;
+      levelValue++
+      level.value = levelValue;
+      loadWordsFromAPI(levelValue);
+      console.log(levelValue);
+      
+
+      winCard.style.display = "none"
+      document.querySelector(".images-container").innerHTML = '';
+      timeLeft = 60;
+
     })
 }
 }
@@ -370,35 +369,6 @@ function onMouseUp() {
   isMouseDown = false;
   checkWordOnRelease();
 }
-gridElement.addEventListener(
-  "touchmove",
-  e => {
-    if (!isTouching) return;
-
-    e.preventDefault();
-
-    const touch = e.touches[0];
-    const el = document.elementFromPoint(
-      touch.clientX,
-      touch.clientY
-    );
-
-    if (el && el.classList.contains("cell")) {
-      onCellClick(el);
-    }
-  },
-  { passive: false }
-);
-
-gridElement.addEventListener(
-  "touchend",
-  () => {
-    if (!isTouching) return;
-
-    isTouching = false;
-    checkWordOnRelease();
-  }
-);
 
 
 function checkWordOnRelease() {
@@ -413,27 +383,6 @@ function checkWordOnRelease() {
     resetSelection();
   }
 }
-
-/**********************
- * TOUCH SUPPORT
- **********************/
-let isTouching = false;
-
-function onTouchStart(e, cell) {
-  e.preventDefault(); // يمنع Scroll
-  isTouching = true;
-  resetSelection();
-  onCellClick(cell);
-}
-
-function onTouchEnd() {
-  if (!isTouching) return;
-
-  isTouching = false;
-  checkWordOnRelease();
-}
-
-
 
 /**********************
  * HELPERS

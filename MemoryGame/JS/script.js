@@ -113,7 +113,7 @@ function hideLoading() {
 /**********************
  * INIT
  **********************/
-loadWordsFromAPI();
+// loadWordsFromAPI();
 
 
 /**********************
@@ -127,13 +127,13 @@ loadWordsFromAPI();
   //   "difficultyLevel": 1
   // },
   
-async function loadWordsFromAPI() {
+async function loadWordsFromAPI(level) {
 
     showLoading(); // Set loading to true before the API call
 
-  const baseUrl = "https://pictopuzzle.runasp.net"
+  const baseUrl = "https://picto.runasp.net"
   try {
-    const response = await fetch(`${baseUrl}/api/Words`);
+    const response = await fetch(`${baseUrl}/api/Words/difficulty/${level}`);
     if(response.ok){
         const data = await response.json();
             
@@ -162,26 +162,32 @@ async function loadWordsFromAPI() {
     // Fallback words 
     CardArray = [
       { 
+        id: 1,
         word: "CAT", 
         image: "../assets/images/cat.jpeg" 
       },
       { 
+        id: 2,
         word: "DOG", 
         image: "../assets/images/dog.jpeg" 
       },
       { 
+        id: 3,
         word: "LION", 
         image: "../assets/images/lion.jpeg" 
       },
       { 
+        id: 1,
         word: "CAT", 
         image: "../assets/images/cat.jpeg" 
       },
       { 
+        id: 2,
         word: "DOG", 
         image: "../assets/images/dog.jpeg" 
       },
       { 
+        id: 3,
         word: "LION", 
         image: "../assets/images/lion.jpeg" 
       },
@@ -191,6 +197,22 @@ async function loadWordsFromAPI() {
     hideLoading(); // Set loading to false after the API call is complete
   }
 }
+
+document.getElementById("startBtn").addEventListener("click", () => {
+  const level = document.getElementById("levelInput").value;
+  console.log(level,'LLL');
+  
+
+  if (!level) {
+    alert("Please enter a valid level");
+    return;
+  }
+
+  loadWordsFromAPI(level);
+
+  GridDisplay.innerHTML = ''
+
+});
 
 //idk what ()=>0.5 - Math.random() does
 function createBoard() {
@@ -243,7 +265,7 @@ function checkMatch() {
         cardsChosen.pop()
         cardsChosen.pop()
 
-        if (score % CardArray.length*10 === 0) {
+        if (score % CardArray.length*10 === 0) {          
 
             const winCard = document.querySelector(".win")
             const finalScore = document.getElementById('all-score')
@@ -260,7 +282,7 @@ function checkMatch() {
                 CardArray.sort(() => 0.5 - Math.random())
                 createBoard();
             })
-        }
+        }        
     }
     else {
         originalCardsChosen[0].setAttribute('src', '../assets/images/F0394208.PNG')
