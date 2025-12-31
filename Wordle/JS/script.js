@@ -28,24 +28,30 @@ function hideLoading() {
     document.getElementById('loading-spinner').style.display = 'none';
 }
 
+// TO STATR GAME 
+function startGame() {
+    document.querySelector('.game-body').style.display = 'flex';
+}
+
 // --------- INIT ---------
-async function initGame() {
-  resetState();
-  await fetchWord();
-  renderEmptyGrid();
-}
+// async function initGame() {
+//   resetState();
+//   await fetchWord();
+//   renderEmptyGrid();
+// }
 
-function resetState() {
-  currentGuess = '';
-  turn = 0;
-  isCorrect = false;
-  guesses = Array(6).fill(null);
-  history = [];
-  usedKeys = {};
-  hideModal();
-}
+// function resetState() {
+//   currentGuess = '';
+//   turn = 0;
+//   isCorrect = false;
+//   guesses = Array(6).fill(null);
+//   history = [];
+//   usedKeys = {};
+//   hideModal();
+// }
 
-async function startNewGame() {
+async function startNewGame(gameLevel) {
+
   // reset state
   currentGuess = '';
   turn = 0;
@@ -63,10 +69,13 @@ async function startNewGame() {
   });
 
   // fetch new word + image
-  await fetchWord();
+  await fetchWord(gameLevel);
 
   // reset grid
   renderEmptyGrid();
+
+  // SHOW GAME
+    startGame();
 }
 
 // --------- FETCH WORD ---------
@@ -106,7 +115,8 @@ document.getElementById("startBtn").addEventListener("click", () => {
     return;
   }
 
-  fetchWord(level);
+  startNewGame(level)
+  // fetchWord(level);
 
 });
 
@@ -270,7 +280,8 @@ function showModal(win) {
 
 // --------- NEW GAME ---------
 nextBtn.addEventListener('click', () => {
-  startNewGame();
+  const level = document.getElementById("levelInput").value;
+  startNewGame(level);
 });
 
 function hideModal() {
@@ -278,4 +289,4 @@ function hideModal() {
 }
 
 // --------- START ---------
-initGame();
+// initGame();

@@ -41,8 +41,8 @@ async function loadWordsFromAPI(level) {
         image: item.imageUrl
       }));
   
-      startGame();
-      console.log(WORDS, 'www');
+      // startGame();
+      console.log(WORDS, 'api');
       
   
     }else{
@@ -67,16 +67,17 @@ async function loadWordsFromAPI(level) {
         image: "../assets/images/lion.jpeg" 
       },
     ];
-    startGame();
+    // startGame();
 
   }finally{
     hideLoading(); // Set loading to false after the API call is complete
   }
 }
 
-document.getElementById("startBtn").addEventListener("click", () => {
+document.getElementById("startBtn").addEventListener("click", async () => {
   const level = document.getElementById("levelInput").value;
   console.log(level,'LLL');
+  document.getElementById("startBtn").style.pointerEvents = 'none'
   
 
   if (!level) {
@@ -84,7 +85,8 @@ document.getElementById("startBtn").addEventListener("click", () => {
     return;
   }
 
-  loadWordsFromAPI(level);
+  await loadWordsFromAPI(level);
+  startGame();
 
 });
 
@@ -96,7 +98,7 @@ let selectedCells = [];
 let foundWords = [];
 let currentWordIndex = 0;
 let score = 0;
-let timeLeft = 60;
+let timeLeft = 90;
 
 /**********************
  * INIT
@@ -302,7 +304,7 @@ function checkWin() {
   if (currentWordIndex === WORDS.length) {
     clearInterval(timerInterval);
 
-    const timeTaken = 60 - timeLeft;
+    const timeTaken = 90 - timeLeft;
     const winCard = document.querySelector(".win")
     const finshedTime = document.getElementById('finshed-time')
     const finalScore = document.getElementById('all-score')
@@ -316,18 +318,22 @@ function checkWin() {
     restartBtn.addEventListener('click', () => {
         location.reload()
     })
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener('click', async () => {
+      winCard.style.display = "none"
+      timerInterval = null;
+      document.querySelector(".images-container").innerHTML = '';
+      currentWordIndex = 0;
+      timeLeft = 90;
+
       const level = document.getElementById("levelInput");
       levelValue = level.value;
-      levelValue++
-      level.value = levelValue;
-      loadWordsFromAPI(levelValue);
-      console.log(levelValue);
-      
-
-      winCard.style.display = "none"
-      document.querySelector(".images-container").innerHTML = '';
-      timeLeft = 60;
+      if(levelValue < 2)
+      {
+        levelValue++
+        level.value = levelValue;
+      }
+      await loadWordsFromAPI(levelValue);
+      startGame()
 
     })
 }
