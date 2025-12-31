@@ -40,6 +40,7 @@ body {
     }
 
     .challenges{
+        width: 100%;
         padding: 10px 30px;
         display: flex;
         align-items: center;
@@ -51,6 +52,7 @@ body {
             display: flex;
             text-decoration: none;
             .challenge-box{
+                width: 100%;
                 padding: 45px 40px;
                 background: #1e293b;
                 border-radius: 10px;
@@ -78,7 +80,7 @@ body {
         }
     }
 }
-.card{
+/* .card{
     width: 75%;
     background: #1e293b;
     align-items: center;
@@ -111,7 +113,7 @@ body {
         color: #6b6f76;
         padding: 1rem 0;
     }
-}
+} */
 /* ANIMATIONS  */
 @keyframes fadeInUp {
     0% {
