@@ -29,6 +29,21 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+.loading{
+  display: none;
+  /* position: absolute;
+  left: 48%; */
+  .loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #FFF;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+    }
+}
 .stats{
   display: flex;
   align-items: center;
@@ -146,4 +161,45 @@ body {
     p{
         font-size: 24px;
     }
+}
+
+/* LOADER STYLE */
+@keyframes rotation {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+} 
+
+@media (min-width : 280px) and (max-width : 767px){
+  .game-header{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    h1{
+      font-size: 1.5rem;
+    }
+  }
+
+  .main-body{
+    padding: 0px 22px;
+  }
+
+  .input-sectioon{
+    width: 100%;
+  }
+
+  button{
+    font-size: 16px;
+    padding: 0px 20px;
+  }
+
+  .respons-section{
+    flex-direction: column;
+    p{
+      font-size: 20px;
+    }
+  }
 }
